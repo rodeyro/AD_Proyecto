@@ -21,4 +21,9 @@ public class Users {
     public  void addUser(User usuario) {
         users.put(usuario.getName(),usuario);
     }
+
+    public User getUser(String user) {
+        return users.get(user);
+    }
+
 }

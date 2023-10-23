@@ -1,14 +1,13 @@
 package Proyecto_AD_UD1.gui;
 
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
+import Proyecto_AD_UD1.model.App;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-
-import Proyecto_AD_UD1.model.App;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 
 public class UserDetails extends JFrame implements ActionListener {
 
@@ -99,6 +98,7 @@ public class UserDetails extends JFrame implements ActionListener {
 
 		exportarMenu.add(xmlMenu);
 		exportarMenu.add(jsonMenu);
+		setVisible(true);
 	}
 
 	@Override

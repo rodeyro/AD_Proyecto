@@ -18,10 +18,25 @@ public class App {
 
     }
 
+    public String getFilename() {
+        return filename;
+    }
+
+    public Users getUsers() {
+        return users;
+    }
+
+    public void setUsers(Users users) {
+        this.users = users;
+    }
+
     public Session getSession() {
         return session;
     }
 
+    public void setSession(Session session) {
+        this.session = session;
+    }
 
     private ActionListener btnIniciarSesionActionListener(){
         ActionListener al = new ActionListener() {

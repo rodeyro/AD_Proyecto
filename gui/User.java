@@ -116,8 +116,7 @@ public class User extends JFrame implements ActionListener {
 		}
 
 		if(e.getSource()== btnVerDatos){;
-			//new UserDetails();
-			dispose();
+			new UserDetails(app , nombreUsuario , String.valueOf(app.getUsers().getUser(nombreUsuario).getAge()), app.getUsers().getUser(nombreUsuario).getEmail());
 		}
 
 
