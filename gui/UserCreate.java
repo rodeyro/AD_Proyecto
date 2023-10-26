@@ -1,14 +1,13 @@
 package Proyecto_AD_UD1.gui;
 
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import Proyecto_AD_UD1.model.App;
+import Proyecto_AD_UD1.model.Users;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-
-import Proyecto_AD_UD1.model.App;
-import Proyecto_AD_UD1.model.Users;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class UserCreate extends JFrame implements ActionListener {
 
@@ -100,12 +99,21 @@ public class UserCreate extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 	 if (e.getSource() == btnCrear){
 		 String nombre = textoNombre.getText();
-		 String pass;
+		 String pass  = textoContraseña.getText();
 		 int edad = Integer.parseInt(textoEdad.getText());
 		 String correo = textoCorreo.getText();
-		// Proyecto_AD_UD1.gui.Proyecto_AD_UD1.model.User user = new Proyecto_AD_UD1.gui.Proyecto_AD_UD1.model.User(nombre,pass,edad,correo);
+		 Proyecto_AD_UD1.model.User user = new Proyecto_AD_UD1.model.User(nombre,pass,edad,correo);
 		 Users users = new Users();
-	//	 users.addUser(user);
+		 users.addUser(user);
+		 System.out.println(user.getName());
+		 System.out.println(user.getPasswordHash());
+		 System.out.println(user.getAge());
+		 System.out.println(user.getEmail());
 	 }
+
+		if (e.getSource() == btnCancelar){
+			new UserCreate(app);
+			dispose();
+		}
 	}
 }
