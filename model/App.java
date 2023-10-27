@@ -47,6 +47,18 @@ public class App {
         fileHander.almacenarUsuarios(users);
     }
 
+    public void changePassword(String nombre, String pass, int edad, String correo){
+        User user = new User(nombre, pass, edad, correo);
+        users.addUser(user);
+        fileHander.almacenarUsuarios(users);
+    }
+
+   /* public void deleteUser(String nombre, String pass, int edad, String correo){
+        users.getUser(nombre);
+        fileHander.eliminarUsuarios(users);
+
+   }*/
+
     public boolean login(String user, String pass) {
         Session session = new Session();
 

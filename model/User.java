@@ -17,6 +17,10 @@ public class User implements Serializable {
         this.email = email;
     }
 
+    public User(String password) {
+        this.passwordHash = BCrypt.hashpw(password, BCrypt.gensalt());;
+    }
+
     public String getName() {
         return name;
     }

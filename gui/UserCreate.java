@@ -105,7 +105,7 @@ public class UserCreate extends JFrame implements ActionListener {
 	 }
 
 		if (e.getSource() == btnCancelar){
-			new UserCreate(app);
+			new User(app,app.getUsers().getUser("admin").getName());
 			dispose();
 		}
 	}

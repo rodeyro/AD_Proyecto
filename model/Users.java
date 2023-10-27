@@ -22,6 +22,10 @@ public class Users implements Serializable {
         users.put(usuario.getName(),usuario);
     }
 
+   /* public  void deleteUser() {
+
+    }*/
+
     public User getUser(String user) {
         return users.get(user);
     }

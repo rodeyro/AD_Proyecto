@@ -1,16 +1,12 @@
 package Proyecto_AD_UD1.gui;
 
+import Proyecto_AD_UD1.model.App;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import Proyecto_AD_UD1.model.App;
 
 public class UserDelete extends JFrame implements ActionListener {
 
@@ -51,11 +47,19 @@ public class UserDelete extends JFrame implements ActionListener {
 		btnCancelar.setBounds(35, 56, 89, 23);
 		btnCancelar.addActionListener(this);
 		contentPane.add(btnCancelar);
+		setVisible(true);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		/*if (e.getSource() == btnBorrar) {
+			app.deleteUser(app.getUsers().getUser(nombreUsuario).getName(), app.getUsers().getUser(nombreUsuario).getPasswordHash(), app.getUsers().getUser(nombreUsuario).getAge(), app.getUsers().getUser(nombreUsuario).getEmail());
+		}*/
 
+		if (e.getSource() == btnCancelar) {
+			new User(app, app.getUsers().getUser(nombreUsuario).getName());
+			dispose();
+		}
 
 	}
 
