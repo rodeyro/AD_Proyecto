@@ -1,19 +1,14 @@
 package Proyecto_AD_UD1.model;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 public class App {
     private final String filename = "usuarios.bin";
     private Users users;
     private Session session;
-
+    private FileHandler fileHander;
 
     public App() {
-        FileHandler fileHander = new FileHandler(this.filename);
-        this.users = new Users();
-        fileHander.leerUsuarios();
-        fileHander.almacenarUsuarios(this.users.getUsers());
+        this.fileHander = new FileHandler(this.filename);
+        this.users = fileHander.leerUsuarios();
         this.session = new Session();
 
     }
@@ -38,13 +33,29 @@ public class App {
         this.session = session;
     }
 
-    private ActionListener btnIniciarSesionActionListener(){
-        ActionListener al = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+    public FileHandler getFileHander() {
+        return fileHander;
+    }
 
-            }
-        };
-        return al;
+    public void setFileHander(FileHandler fileHander) {
+        this.fileHander = fileHander;
+    }
+
+    public void createUser(String nombre, String pass, int edad, String correo) {
+        User user = new User(nombre, pass, edad, correo);
+        users.addUser(user);
+        fileHander.almacenarUsuarios(users);
+    }
+
+    public boolean login(String user, String pass) {
+        Session session = new Session();
+
+        //1. comprobar user+pass de usuario
+        return session.login(user,pass, this.users);
+
+        //2. si ok => guardamos en session el usuario
+
+        //3. si ok => return true;
+
     }
 }

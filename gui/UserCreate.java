@@ -1,7 +1,6 @@
 package Proyecto_AD_UD1.gui;
 
 import Proyecto_AD_UD1.model.App;
-import Proyecto_AD_UD1.model.Users;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -102,13 +101,7 @@ public class UserCreate extends JFrame implements ActionListener {
 		 String pass  = textoContraseña.getText();
 		 int edad = Integer.parseInt(textoEdad.getText());
 		 String correo = textoCorreo.getText();
-		 Proyecto_AD_UD1.model.User user = new Proyecto_AD_UD1.model.User(nombre,pass,edad,correo);
-		 Users users = new Users();
-		 users.addUser(user);
-		 System.out.println(user.getName());
-		 System.out.println(user.getPasswordHash());
-		 System.out.println(user.getAge());
-		 System.out.println(user.getEmail());
+		 app.createUser(nombre, pass, edad, correo);
 	 }
 
 		if (e.getSource() == btnCancelar){

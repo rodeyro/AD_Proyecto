@@ -7,18 +7,12 @@ public class Session {
         this.user = null;
     }
 
-    public void login(String user, String pass) {
-      Users map = new Users();
-        for (User usuario : map.getUsers().values()
-             ) {
-            if(user.equals(usuario.getName()) && pass.equals(usuario.getPasswordHash())){
-                System.out.println("datos correctos");
-                this.user=usuario;
-            }
+    public boolean login(String username, String pass, Users users) {
+        User user = users.getUser(username);
+        boolean ok = user.checkPassword(pass);
+        if(ok){
+            this.user = user;
         }
-    }
-
-    public boolean isSignIn() {
-        return user != null;
+        return ok;
     }
 }

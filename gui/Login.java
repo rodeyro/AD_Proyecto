@@ -1,7 +1,6 @@
 package Proyecto_AD_UD1.gui;
 
 import Proyecto_AD_UD1.model.App;
-import Proyecto_AD_UD1.model.Session;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -66,9 +65,7 @@ public class Login extends JFrame implements ActionListener {
 			String user = textoUsuario.getText();
 			String pass = textoContraseña.getText();
 
-			Session session = app.getSession();
-			session.login(user,pass);
-			if (session.isSignIn()){
+			if(app.login(user,pass)) {
 				new User(app,user);
 				dispose();
 			} else {

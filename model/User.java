@@ -1,5 +1,7 @@
 package Proyecto_AD_UD1.model;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import java.io.Serializable;
 
 public class User implements Serializable {
@@ -8,15 +10,9 @@ public class User implements Serializable {
     private int age;
     private String email;
 
-    public User(String name, String passwordHash, int age, String email) {
+    public User(String name, String password, int age, String email) {
         this.name = name;
-        this.passwordHash = passwordHash;
-        this.age = age;
-        this.email = email;
-    }
-
-    public User(String name, int age, String email) {
-        this.name = name;
+        this.passwordHash = BCrypt.hashpw(password, BCrypt.gensalt());;
         this.age = age;
         this.email = email;
     }
@@ -51,5 +47,9 @@ public class User implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public boolean checkPassword(String pass) {
+        return BCrypt.checkpw(pass, passwordHash);
     }
 }

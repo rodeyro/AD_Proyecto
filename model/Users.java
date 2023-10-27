@@ -1,13 +1,13 @@
 package Proyecto_AD_UD1.model;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class Users {
-    private HashMap<String, User> users = new HashMap<>();
+public class Users implements Serializable {
+    private HashMap<String, User> users;
 
     public Users() {
-        User user = new User("admin","admin", 0, "admin@admin.local");
-        users.put(user.getName(),user);
+        users = new HashMap<>();
     }
 
     public HashMap<String, User> getUsers() {
@@ -26,4 +26,7 @@ public class Users {
         return users.get(user);
     }
 
+    public boolean userExists(String username) {
+        return users.containsKey(username);
+    }
 }
