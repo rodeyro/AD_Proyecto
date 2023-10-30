@@ -1,5 +1,7 @@
 package Proyecto_AD_UD1.model;
 
+import java.io.File;
+
 public class App {
     private final String filename = "usuarios.bin";
     private Users users;
@@ -54,8 +56,8 @@ public class App {
     }
 
    /* public void deleteUser(String nombre, String pass, int edad, String correo){
-        users.getUser(nombre);
-        fileHander.eliminarUsuarios(users);
+        Users usuarioborara = users.getUser(nombre);
+        fileHander.eliminarUsuarios(usuarioborara);
 
    }*/
 
@@ -70,4 +72,9 @@ public class App {
         //3. si ok => return true;
 
     }
+
+    public void setXML(Users nombre,File selectedFile,String usuario  ) {
+        XML.exportarUsuarioXML(nombre, String.valueOf(selectedFile), usuario);
+    }
+
 }
