@@ -18,20 +18,7 @@ public class FileHandler {
         }
     }
 
-   /* public void eliminarUsuarios(Users users) {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
-            users = (Users) ois.readObject();
-            users.deleteUser();
-         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
 
-
-    }*/
 
     public Users leerUsuarios() {
         Users users = new Users();

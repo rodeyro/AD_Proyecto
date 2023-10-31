@@ -55,11 +55,11 @@ public class App {
         fileHander.almacenarUsuarios(users);
     }
 
-   /* public void deleteUser(String nombre, String pass, int edad, String correo){
-        Users usuarioborara = users.getUser(nombre);
-        fileHander.eliminarUsuarios(usuarioborara);
-
-   }*/
+   public void deleteUser(String nombreborrar){
+       users.deleteUser(nombreborrar);
+       session.logout();
+       fileHander.almacenarUsuarios(users);
+   }
 
     public boolean login(String user, String pass) {
         Session session = new Session();

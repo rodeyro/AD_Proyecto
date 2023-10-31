@@ -22,9 +22,9 @@ public class Users implements Serializable {
         users.put(usuario.getName(),usuario);
     }
 
-   /* public  void deleteUser() {
-
-    }*/
+    public  void deleteUser(String nombre) {
+        users.remove(nombre);
+    }
 
     public User getUser(String user) {
         return users.get(user);
