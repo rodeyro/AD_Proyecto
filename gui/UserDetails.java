@@ -91,8 +91,8 @@ public class UserDetails extends JFrame implements ActionListener {
         JMenu exportarMenu = new JMenu("Exportar");
         menuBar.add(exportarMenu);
 
-        xmlMenu = new JMenuItem("Proyecto_AD_UD1.model.XML");
-        jsonMenu = new JMenuItem("Proyecto_AD_UD1.model.JSON");
+        xmlMenu = new JMenuItem("XML");
+        jsonMenu = new JMenuItem("JSON");
 
         xmlMenu.addActionListener(this);
         jsonMenu.addActionListener(this);
@@ -109,7 +109,7 @@ public class UserDetails extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == xmlMenu) {
-            System.out.println("Exportar usuario (Proyecto_AD_UD1.model.XML)");
+            System.out.println("Exportar usuario (XML)");
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setSelectedFile(new File("usuario.xml"));
             int returnValue = fileChooser.showOpenDialog(null);
@@ -126,13 +126,15 @@ public class UserDetails extends JFrame implements ActionListener {
         }
 
         if (e.getSource() == jsonMenu) {
-            System.out.println("Exportar usuario (Proyecto_AD_UD1.model.JSON)");
+            System.out.println("Exportar usuario (JSON)");
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setSelectedFile(new File("usuario.json"));
             int returnValue = fileChooser.showOpenDialog(null);
 
             if (returnValue == JFileChooser.APPROVE_OPTION) {
                 File selectedFile = fileChooser.getSelectedFile();
+                Users nombre = app.getUsers();
+                app.setJSON(nombre,selectedFile);
                 System.out.println("Archivo seleccionado: " + selectedFile.getAbsolutePath());
             } else {
                 System.out.println("Selección de archivo cancelada.");

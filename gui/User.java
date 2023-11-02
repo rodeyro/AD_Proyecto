@@ -129,6 +129,18 @@ public class User extends JFrame implements ActionListener {
 			dispose();
 		}
 
+		if(e.getSource()== btnExportarUsuarios){
+			JFileChooser fileChooser = new JFileChooser();
+			fileChooser.setSelectedFile(new File("usuarios.zip"));
+			int returnValue = fileChooser.showOpenDialog(null);
+
+			if (returnValue == JFileChooser.APPROVE_OPTION) {
+
+			} else {
+				System.out.println("Selección de archivo cancelada.");
+			}
+			dispose();
+		}
 
 
 	}
