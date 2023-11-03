@@ -77,7 +77,7 @@ public class App {
         XML.exportarUsuarioXML(nombre, String.valueOf(selectedFile), usuario);
     }
 
-    public void setJSON(Users nombre,File selectedFile) {
+    public void setJSON(User nombre, File selectedFile) {
         JSON.exportarUsuario(nombre, String.valueOf(selectedFile));
     }
 

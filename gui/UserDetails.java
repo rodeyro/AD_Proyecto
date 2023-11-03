@@ -1,6 +1,7 @@
 package Proyecto_AD_UD1.gui;
 
 import Proyecto_AD_UD1.model.App;
+import Proyecto_AD_UD1.model.User;
 import Proyecto_AD_UD1.model.Users;
 
 import javax.swing.*;
@@ -133,8 +134,12 @@ public class UserDetails extends JFrame implements ActionListener {
 
             if (returnValue == JFileChooser.APPROVE_OPTION) {
                 File selectedFile = fileChooser.getSelectedFile();
-                Users nombre = app.getUsers();
-                app.setJSON(nombre,selectedFile);
+                String usuario = datoNombre.getText();
+                String email = datoCorreo.getText();
+                String pass = app.getUsers().getUser(usuario).getPasswordHash();
+                int edad = Integer.parseInt(datoEdad.getText());
+                User nombre = new Proyecto_AD_UD1.model.User(usuario,email,edad,pass);
+                app.setJSON(nombre, selectedFile);
                 System.out.println("Archivo seleccionado: " + selectedFile.getAbsolutePath());
             } else {
                 System.out.println("Selección de archivo cancelada.");

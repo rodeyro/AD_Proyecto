@@ -11,6 +11,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
 public class XML {
     // Exportación de un usuario en formato XML
@@ -49,5 +50,42 @@ public class XML {
             e.printStackTrace();
         }
     }
+
+    public static void exportartodosUsuarioXML(List<Users> usuario, String rutaArchivo , String nusuario) {
+        try {
+            Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+            Element rootElement = doc.createElement("usuarios");
+            doc.appendChild(rootElement);
+            for (Users user:usuario){
+                Element userElement = doc.createElement("usuario");
+                rootElement.appendChild(userElement);
+
+                Element nombre = doc.createElement("nombre");
+                nombre.appendChild(doc.createTextNode(user.getUser(nusuario).getName()));
+                userElement.appendChild(nombre);
+
+                Element password = doc.createElement("Password");
+                password.appendChild(doc.createTextNode(String.valueOf(user.getUser(nusuario).getPasswordHash())));
+                userElement.appendChild(password);
+
+                Element edad = doc.createElement("edad");
+                edad.appendChild(doc.createTextNode(String.valueOf(user.getUser(nusuario).getAge())));
+                userElement.appendChild(edad);
+
+                Element email = doc.createElement("email");
+                email.appendChild(doc.createTextNode(user.getUser(nusuario).getEmail()));
+                userElement.appendChild(email);
+
+                FileWriter fileWriter = new FileWriter(rutaArchivo);
+                TransformerFactory.newInstance().newTransformer().transform(new DOMSource(doc), new StreamResult(fileWriter));
+                fileWriter.close();
+            }
+            System.out.println("Usuarios exportados a XML correctamente.");
+
+        } catch (ParserConfigurationException | TransformerException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 
