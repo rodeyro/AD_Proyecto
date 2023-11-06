@@ -3,28 +3,29 @@ package Proyecto_AD_UD1.model;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
 
 public class XML {
-    // Exportación de un usuario en formato XML
     public static void exportarUsuarioXML(Users usuario, String rutaArchivo , String nusuario) {
         try {
             Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
-            Element rootElement = doc.createElement("usuarios");
+            Element rootElement = doc.createElement("Users");
             doc.appendChild(rootElement);
 
-            Element userElement = doc.createElement("usuario");
+            Element userElement = doc.createElement("User");
             rootElement.appendChild(userElement);
 
-            Element nombre = doc.createElement("nombre");
+            Element nombre = doc.createElement("Name");
             nombre.appendChild(doc.createTextNode(usuario.getUser(nusuario).getName()));
             userElement.appendChild(nombre);
 
@@ -32,11 +33,11 @@ public class XML {
             password.appendChild(doc.createTextNode(String.valueOf(usuario.getUser(nusuario).getPasswordHash())));
             userElement.appendChild(password);
 
-            Element edad = doc.createElement("edad");
+            Element edad = doc.createElement("Age");
             edad.appendChild(doc.createTextNode(String.valueOf(usuario.getUser(nusuario).getAge())));
             userElement.appendChild(edad);
 
-            Element email = doc.createElement("email");
+            Element email = doc.createElement("Email");
             email.appendChild(doc.createTextNode(usuario.getUser(nusuario).getEmail()));
             userElement.appendChild(email);
 
@@ -50,42 +51,49 @@ public class XML {
             e.printStackTrace();
         }
     }
-
-    public static void exportartodosUsuarioXML(List<Users> usuario, String rutaArchivo , String nusuario) {
+    public static void exportarUsuariosXML(Users usuarios, String rutaArchivo) {
         try {
-            Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
-            Element rootElement = doc.createElement("usuarios");
-            doc.appendChild(rootElement);
-            for (Users user:usuario){
-                Element userElement = doc.createElement("usuario");
-                rootElement.appendChild(userElement);
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.newDocument();
 
-                Element nombre = doc.createElement("nombre");
-                nombre.appendChild(doc.createTextNode(user.getUser(nusuario).getName()));
-                userElement.appendChild(nombre);
+                Element rootElement = doc.createElement("Users");
+                doc.appendChild(rootElement);
 
-                Element password = doc.createElement("Password");
-                password.appendChild(doc.createTextNode(String.valueOf(user.getUser(nusuario).getPasswordHash())));
-                userElement.appendChild(password);
+                for (User usuario : usuarios.getUsers().values()) {
+                    Element usuarioElement = doc.createElement("User");
+                    rootElement.appendChild(usuarioElement);
 
-                Element edad = doc.createElement("edad");
-                edad.appendChild(doc.createTextNode(String.valueOf(user.getUser(nusuario).getAge())));
-                userElement.appendChild(edad);
+                    Element nameElement = doc.createElement("Name");
+                    nameElement.appendChild(doc.createTextNode(String.valueOf(usuario.getName())));
+                    usuarioElement.appendChild(nameElement);
 
-                Element email = doc.createElement("email");
-                email.appendChild(doc.createTextNode(user.getUser(nusuario).getEmail()));
-                userElement.appendChild(email);
+                    Element idElement = doc.createElement("Password");
+                    idElement.appendChild(doc.createTextNode(String.valueOf(usuario.getPasswordHash())));
+                    usuarioElement.appendChild(idElement);
 
-                FileWriter fileWriter = new FileWriter(rutaArchivo);
-                TransformerFactory.newInstance().newTransformer().transform(new DOMSource(doc), new StreamResult(fileWriter));
-                fileWriter.close();
+                    Element ageElement = doc.createElement("Age");
+                    ageElement.appendChild(doc.createTextNode(String.valueOf(usuario.getAge())));
+                    usuarioElement.appendChild(ageElement);
+
+                    Element correoElement = doc.createElement("Email");
+                    correoElement.appendChild(doc.createTextNode(usuario.getEmail()));
+                    usuarioElement.appendChild(correoElement);
+                }
+
+                TransformerFactory transformerFactory = TransformerFactory.newInstance();
+                Transformer transformer = transformerFactory.newTransformer();
+                DOMSource source = new DOMSource(doc);
+                StreamResult result = new StreamResult(new File(rutaArchivo));
+                transformer.transform(source, result);
+
+                System.out.println("Usuarios exportados correctamente a " + rutaArchivo);
+            } catch (Exception e) {
+                System.out.println("Error al exportar usuarios a XML: " + e.getMessage());
             }
-            System.out.println("Usuarios exportados a XML correctamente.");
-
-        } catch (ParserConfigurationException | TransformerException | IOException e) {
-            e.printStackTrace();
         }
     }
+
 
 }
 

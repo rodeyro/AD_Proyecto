@@ -33,4 +33,5 @@ public class Users implements Serializable {
     public boolean userExists(String username) {
         return users.containsKey(username);
     }
+
 }
