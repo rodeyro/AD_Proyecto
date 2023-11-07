@@ -64,7 +64,6 @@ public class User extends JFrame implements ActionListener {
 		btnCerrarSesion.addActionListener(this);
 		contentPane.add(btnCerrarSesion);
 
-		System.out.println(nombreUsuario);
 		if(nombreUsuario.equals("admin")) {
 			setBounds(0, 0, 300, 360);
 

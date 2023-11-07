@@ -63,14 +63,12 @@ public class App {
 
     public boolean login(String user, String pass) {
         Session session = new Session();
-
         //1. comprobar user+pass de usuario
         return session.login(user,pass, this.users);
 
         //2. si ok => guardamos en session el usuario
 
         //3. si ok => return true;
-
     }
 
     public void setXML(Users nombre,File selectedFile,String usuario  ) {
