@@ -51,46 +51,49 @@ public class XML {
             e.printStackTrace();
         }
     }
-    public static void exportarUsuariosXML(Users usuarios, String rutaArchivo) {
+    public static String exportarUsuariosXML(Users usuarios) {
+        String xmlPath = "usuarios.xml";
+        File file = new File(xmlPath);
         try {
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.newDocument();
 
-                Element rootElement = doc.createElement("Users");
-                doc.appendChild(rootElement);
+            Element rootElement = doc.createElement("Users");
+            doc.appendChild(rootElement);
 
-                for (User usuario : usuarios.getUsers().values()) {
-                    Element usuarioElement = doc.createElement("User");
-                    rootElement.appendChild(usuarioElement);
+            for (User usuario : usuarios.getUsers().values()) {
+                Element usuarioElement = doc.createElement("User");
+                rootElement.appendChild(usuarioElement);
 
-                    Element nameElement = doc.createElement("Name");
-                    nameElement.appendChild(doc.createTextNode(String.valueOf(usuario.getName())));
-                    usuarioElement.appendChild(nameElement);
+                Element nameElement = doc.createElement("Name");
+                nameElement.appendChild(doc.createTextNode(String.valueOf(usuario.getName())));
+                usuarioElement.appendChild(nameElement);
 
-                    Element idElement = doc.createElement("Password");
-                    idElement.appendChild(doc.createTextNode(String.valueOf(usuario.getPasswordHash())));
-                    usuarioElement.appendChild(idElement);
+                Element idElement = doc.createElement("Password");
+                idElement.appendChild(doc.createTextNode(String.valueOf(usuario.getPasswordHash())));
+                usuarioElement.appendChild(idElement);
 
-                    Element ageElement = doc.createElement("Age");
-                    ageElement.appendChild(doc.createTextNode(String.valueOf(usuario.getAge())));
-                    usuarioElement.appendChild(ageElement);
+                Element ageElement = doc.createElement("Age");
+                ageElement.appendChild(doc.createTextNode(String.valueOf(usuario.getAge())));
+                usuarioElement.appendChild(ageElement);
 
-                    Element correoElement = doc.createElement("Email");
-                    correoElement.appendChild(doc.createTextNode(usuario.getEmail()));
-                    usuarioElement.appendChild(correoElement);
-                }
-
-                TransformerFactory transformerFactory = TransformerFactory.newInstance();
-                Transformer transformer = transformerFactory.newTransformer();
-                DOMSource source = new DOMSource(doc);
-                StreamResult result = new StreamResult(new File(rutaArchivo));
-                transformer.transform(source, result);
-
-                System.out.println("Usuarios exportados correctamente a " + rutaArchivo);
-            } catch (Exception e) {
-                System.out.println("Error al exportar usuarios a XML: " + e.getMessage());
+                Element correoElement = doc.createElement("Email");
+                correoElement.appendChild(doc.createTextNode(usuario.getEmail()));
+                usuarioElement.appendChild(correoElement);
             }
+
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(doc);
+            StreamResult result = new StreamResult(file);
+            transformer.transform(source, result);
+
+            System.out.println("Usuarios exportados correctamente a " + xmlPath);
+        } catch (Exception e) {
+            System.out.println("Error al exportar usuarios a XML: " + e.getMessage());
         }
+        return file.getAbsolutePath();
+    }
     }
 

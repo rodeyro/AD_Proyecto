@@ -94,11 +94,12 @@ public class User extends JFrame implements ActionListener {
 		if(e.getSource() == btnExportarUsuarios) {
 			System.out.println("Exportar usuario (Proyecto_AD_UD1.model.ZIP)");
 			JFileChooser fileChooser = new JFileChooser();
-			fileChooser.setSelectedFile(new File("usuarios.json"));
+			fileChooser.setSelectedFile(new File("usuarios.zip"));
 			int returnValue = fileChooser.showOpenDialog(null);
 			if (returnValue == JFileChooser.APPROVE_OPTION) {
 				File selectedFile = fileChooser.getSelectedFile();
-				app.setAllUsers(selectedFile);
+				Users usuario = app.getUsers();
+				app.setAllUsers(usuario,selectedFile);
 				dispose();
 				System.out.println("Archivo seleccionado: " + selectedFile.getAbsolutePath());
 			} else {

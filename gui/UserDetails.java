@@ -119,7 +119,7 @@ public class UserDetails extends JFrame implements ActionListener {
                 File selectedFile = fileChooser.getSelectedFile();
                 Users nombre = app.getUsers();
                 String usuario = datoNombre.getText();
-                app.setXML(nombre,selectedFile,usuario);
+                    app.setXML(nombre,selectedFile,usuario);
                 System.out.println("Archivo seleccionado: " + selectedFile.getAbsolutePath());
             } else {
                 System.out.println("Selección de archivo cancelada.");
@@ -139,7 +139,7 @@ public class UserDetails extends JFrame implements ActionListener {
                 String pass = app.getUsers().getUser(usuario).getPasswordHash();
                 int edad = Integer.parseInt(datoEdad.getText());
                 User nombre = new Proyecto_AD_UD1.model.User(usuario,email,edad,pass);
-                app.setJSON(nombre, selectedFile);
+                    app.setJSON(nombre, selectedFile);
                 System.out.println("Archivo seleccionado: " + selectedFile.getAbsolutePath());
             } else {
                 System.out.println("Selección de archivo cancelada.");

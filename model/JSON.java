@@ -26,8 +26,11 @@ public class JSON {
             System.out.println("Error al exportar el usuario a JSON: " + e.getMessage());
         }
     }
-    public static void exportartodosUsuario(Users usuario, String rutaArchivo) {
+    public static String exportartodosUsuario(Users usuario) {
+        String xmlPath = "usuarios.json";
+        File file = new File(xmlPath);
         try {
+
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
             objectMapper.setDateFormat(new StdDateFormat().withColonInTimeZone(true));
@@ -35,11 +38,12 @@ public class JSON {
 
             ObjectWriter objectWriter = objectMapper.writer().withDefaultPrettyPrinter();
 
-            objectWriter.writeValue(new File(rutaArchivo), usuario);
+            objectWriter.writeValue(new File(String.valueOf(file)), usuario);
             System.out.println("Usuario exportado correctamente a JSON.");
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Error al exportar el usuario a JSON: " + e.getMessage());
         }
+        return file.getAbsolutePath();
     }
 }

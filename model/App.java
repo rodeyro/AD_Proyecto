@@ -81,7 +81,7 @@ public class App {
         JSON.exportarUsuario(nombre, String.valueOf(selectedFile));
     }
 
-    public void setAllUsers(File selectedFile) {
-        ZIP.exportarAZip(String.valueOf(selectedFile));
+    public void setAllUsers(Users usuario, File selectedFile) {
+        ZIP.crearArchivoZIP(XML.exportarUsuariosXML(usuario),JSON.exportartodosUsuario(usuario), selectedFile);
     }
 }
