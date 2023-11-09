@@ -27,18 +27,21 @@ public class Session {
         return ok;
     }
 
-    public void logout() {
-        if (this.user != null) {
-            String username = this.user.getName();
+    public boolean logout(String username, Users users) {
+        User user = users.getUser(username);
+        if (user == null) {
+            return false;
+        }else if (user != null) {
             this.user = null;
             logEvent(username, "LOGOUT");
         }
+        return true;
     }
 
     private void logEvent(String username, String eventType) {
         String timestamp = getCurrentTimestamp();
         String logEntry = timestamp + " " + username + " " + eventType;
-        try (PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter("session.log", true)))) {
+        try (PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter("C:\\Users\\DAM2_ALU09\\Desktop\\Acceso a Base de datos\\Parte 2\\untitled2\\src\\Proyecto_AD_UD1\\session.log", true)))) {
             writer.println(logEntry);
             System.out.println(logEntry);
         } catch (IOException e) {

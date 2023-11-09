@@ -112,6 +112,7 @@ public class User extends JFrame implements ActionListener {
 		}
 
 		if(e.getSource()== btnCerrarSesion){
+			app.logout(app.getUsers().getUser(nombreUsuario).getName());
 			new Login(app);
 			dispose();
 		}

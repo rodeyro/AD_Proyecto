@@ -3,7 +3,7 @@ package Proyecto_AD_UD1.model;
 import java.io.File;
 
 public class App {
-    private final String filename = "usuarios.bin";
+    private final String filename = "C:\\Users\\DAM2_ALU09\\Desktop\\Acceso a Base de datos\\Parte 2\\untitled2\\src\\Proyecto_AD_UD1\\usuarios.bin";
     private Users users;
     private Session session;
     private FileHandler fileHander;
@@ -57,21 +57,18 @@ public class App {
 
    public void deleteUser(String nombreborrar){
        users.deleteUser(nombreborrar);
-       session.logout();
        fileHander.almacenarUsuarios(users);
    }
 
     public boolean login(String user, String pass) {
-        Session session = new Session();
-        //1. comprobar user+pass de usuario
         return session.login(user,pass, this.users);
-
-        //2. si ok => guardamos en session el usuario
-
-        //3. si ok => return true;
     }
 
-    public void setXML(Users nombre,File selectedFile,String usuario  ) {
+    public boolean logout(String user) {
+        return session.logout(user,this.users);
+    }
+
+    public void setXML(Users nombre,File selectedFile,String usuario) {
         XML.exportarUsuarioXML(nombre, String.valueOf(selectedFile), usuario);
     }
 
@@ -82,4 +79,6 @@ public class App {
     public void setAllUsers(Users usuario, File selectedFile) {
         ZIP.crearArchivoZIP(XML.exportarUsuariosXML(usuario),JSON.exportartodosUsuario(usuario), selectedFile);
     }
+
+
 }
