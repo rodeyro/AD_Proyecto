@@ -81,4 +81,7 @@ public class App {
     }
 
 
+    public void setPDF(Users nombre, String selectedFile, String usuario) {
+        PDF.esportarUsuarioPDF(nombre, selectedFile, usuario);
+    }
 }

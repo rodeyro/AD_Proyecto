@@ -30,7 +30,6 @@ public class JSON {
         String xmlPath = "usuarios.json";
         File file = new File(xmlPath);
         try {
-
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
             objectMapper.setDateFormat(new StdDateFormat().withColonInTimeZone(true));

@@ -23,6 +23,7 @@ public class UserDetails extends JFrame implements ActionListener {
     private JTextPane datoCorreo;
     private JButton btnVolver;
     private JMenuItem xmlMenu;
+    private JMenuItem pdfMenu;
     private JMenuItem jsonMenu;
 
     private App app;
@@ -94,12 +95,15 @@ public class UserDetails extends JFrame implements ActionListener {
 
         xmlMenu = new JMenuItem("XML");
         jsonMenu = new JMenuItem("JSON");
+        pdfMenu = new JMenuItem("PDF");
 
         xmlMenu.addActionListener(this);
         jsonMenu.addActionListener(this);
+        pdfMenu.addActionListener(this);
 
         exportarMenu.add(xmlMenu);
         exportarMenu.add(jsonMenu);
+        exportarMenu.add(pdfMenu);
         setVisible(true);
     }
 
@@ -140,6 +144,23 @@ public class UserDetails extends JFrame implements ActionListener {
                 int edad = Integer.parseInt(datoEdad.getText());
                 User nombre = new Proyecto_AD_UD1.model.User(usuario,email,edad,pass);
                     app.setJSON(nombre, selectedFile);
+                System.out.println("Archivo seleccionado: " + selectedFile.getAbsolutePath());
+            } else {
+                System.out.println("Selección de archivo cancelada.");
+            }
+        }
+
+        if (e.getSource() == pdfMenu) {
+            System.out.println("Exportar usuario (PDF)");
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setSelectedFile(new File("usuario.pdf"));
+            int returnValue = fileChooser.showOpenDialog(null);
+
+            if (returnValue == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = fileChooser.getSelectedFile();
+                Users nombre = app.getUsers();
+                String usuario = datoNombre.getText();
+                    app.setPDF(nombre,selectedFile.toString(),usuario);
                 System.out.println("Archivo seleccionado: " + selectedFile.getAbsolutePath());
             } else {
                 System.out.println("Selección de archivo cancelada.");
